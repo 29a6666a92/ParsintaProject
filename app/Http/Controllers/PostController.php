@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::lastest()->simplePaginate(4);
+        $posts = Post::latest()->simplePaginate(4);
         return view('posts.index',compact('posts'));
     }
 
@@ -25,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $posts = Post::create([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'content' => $request->content
+        ]);
+
+        return redirect('posts');
     }
 
     /**

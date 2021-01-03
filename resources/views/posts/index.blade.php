@@ -1,12 +1,18 @@
-@extends('templates.app')
-@section('title','Home')
+@extends('templates.app',['title' => 'Post'])
 
 @section('content')
 <div class="container">
+  <div class="d-flex justify-content-between">
+    <div>
+      <h4 class="mb-3">Posts</h4>
+    </div>
+    <div>
+      <a href="{{url('posts/create')}}" class="btn btn-primary">New</a>
+    </div>
+  </div>
   <div class="row">
-    <div class="col-lg">
-      <h2 class="mb-3">Posts</h2>
-      @foreach ($posts as $post)
+    @foreach ($posts as $post)
+    <div class="col-lg-4">
       <div class="card mb-3">
         <div class="card-header">
           {{$post->title}}
@@ -19,11 +25,11 @@
           Published {{$post->created_at->diffForHumans()}}
         </div>
       </div>
-      @endforeach
-      {{$posts->links()}}
-
-
     </div>
+    @endforeach
+  </div>
+  <div class="d-flex justify-content-center">
+    {{$posts->links()}}
   </div>
 </div>
 @endsection

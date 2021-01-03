@@ -1,5 +1,4 @@
-@extends('templates.app')
-@section('title','Home')
+@extends('templates.app',['title' => 'Home'])
 
 @section('content')
 <div class="container">
