@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+  @if ($posts->count())
   <div class="d-flex justify-content-between">
     <div>
       <h4 class="mb-3">Posts</h4>
@@ -28,6 +29,12 @@
     </div>
     @endforeach
   </div>
+  @else
+  <div class="alert alert-secondary" role="alert">
+    <p>404</p>
+  </div>
+  @endif
+
   <div class="d-flex justify-content-center">
     {{$posts->links()}}
   </div>
