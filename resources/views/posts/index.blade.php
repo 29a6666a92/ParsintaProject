@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-  @if ($posts->count())
   <div class="d-flex justify-content-between">
     <div>
       <h4 class="mb-3">Posts</h4>
@@ -12,7 +11,7 @@
     </div>
   </div>
   <div class="row">
-    @foreach ($posts as $post)
+    @forelse ($posts as $post)
     <div class="col-lg-4">
       <div class="card mb-3">
         <div class="card-header">
@@ -27,13 +26,13 @@
         </div>
       </div>
     </div>
-    @endforeach
+    @empty
+    <div class="alert alert-primary" role="alert">
+      NO DATA THERE
+    </div>
+    @endforelse
   </div>
-  @else
-  <div class="alert alert-secondary" role="alert">
-    <p>404</p>
-  </div>
-  @endif
+
 
   <div class="d-flex justify-content-center">
     {{$posts->links()}}
