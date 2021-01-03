@@ -7,8 +7,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="#">Home</a>
-        <a class="nav-item nav-link" href="#">Post</a>
+        <a class="nav-item nav-link{{request()->is('/') ? ' active' : ''}}" href="{{url('/')}}">Home</a>
+        <a class="nav-item nav-link{{request()->is('posts') ? ' active' : ''}}" href="{{url('posts')}}">Post</a>
       </div>
     </div>
   </div>
