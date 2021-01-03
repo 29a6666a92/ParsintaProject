@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg">
       <h2 class="mb-3">Posts</h2>
       @foreach ($posts as $post)
       <div class="card mb-3">
@@ -20,8 +20,8 @@
         </div>
       </div>
       @endforeach
-
       {{$posts->links()}}
+
 
     </div>
   </div>
