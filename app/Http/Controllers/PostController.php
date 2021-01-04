@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->simplePaginate(4);
+        $posts = Post::latest()->simplePaginate(10);
         return view('posts.index',compact('posts'));
     }
 
@@ -69,7 +69,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit',compact('post'));
     }
 
     /**
@@ -81,7 +81,20 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+
+
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        Post::where('slug' ,$post->slug)
+            ->update([
+                'title' => $request->title,
+                'content' => $request->content,
+            ]);
+
+            return redirect('posts')->with('status','Edit Success !');
     }
 
     /**

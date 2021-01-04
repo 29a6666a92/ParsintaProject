@@ -11,7 +11,8 @@
           <h6 class="card-subtitle mb-2 text-muted">{{$post->slug}}</h6>
           <p class="card-text">{{$post->content}}
           </p>
-          <a href="{{url('posts')}}" class="card-link">Back</a>
+          <a href="{{url('posts/' . $post->slug . '/edit')}}" class="btn btn-primary">Edit</a>
+          <a href="{{url('posts')}}" class="card-link float-right">Back</a>
         </div>
       </div>
     </div>
