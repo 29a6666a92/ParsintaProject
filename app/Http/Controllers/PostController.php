@@ -37,13 +37,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $posts = Post::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'content' => $request->content
-        ]);
 
-        return redirect('posts');
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+      
+        $post = $request->all();
+        $post['slug'] = Str::slug($request->title);
+
+        Post::create($post);
+        return redirect('posts')->with('status','Success !');
     }
 
     /**

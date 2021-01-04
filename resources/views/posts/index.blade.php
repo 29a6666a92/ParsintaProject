@@ -11,6 +11,18 @@
     </div>
   </div>
   <div class="row">
+    <div class="col-lg">
+      @if (session('status'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{session('status')}}</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      @endif
+    </div>
+  </div>
+  <div class="row">
     @forelse ($posts as $post)
     <div class="col-lg-4">
       <div class="card mb-3">
