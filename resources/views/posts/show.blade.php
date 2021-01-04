@@ -12,6 +12,11 @@
           <p class="card-text">{{$post->content}}
           </p>
           <a href="{{url('posts/' . $post->slug . '/edit')}}" class="btn btn-primary">Edit</a>
+          <form action="{{url('posts/' . $post->slug)}}" method="post" class="d-inline-block">
+            @method('delete')
+            @csrf
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
           <a href="{{url('posts')}}" class="card-link float-right">Back</a>
         </div>
       </div>

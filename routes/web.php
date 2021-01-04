@@ -23,3 +23,4 @@ Route::post('posts',[PostController::class,'store']);
 Route::get('posts/{post:slug}',[PostController::class,'show']);
 Route::get('posts/{post:slug}/edit',[PostController::class,'edit']);
 Route::put('posts/{post:slug}',[PostController::class,'update']);
+Route::delete('posts/{post:slug}',[PostController::class,'destroy']);
