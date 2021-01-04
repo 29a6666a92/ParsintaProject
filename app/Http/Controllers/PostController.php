@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create',['post' => new Post()]);
     }
 
     /**
@@ -35,14 +36,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
 
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required'
-        ]);
-      
+
         $post = $request->all();
         $post['slug'] = Str::slug($request->title);
 
@@ -79,14 +76,8 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-
-
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required'
-        ]);
 
         Post::where('slug' ,$post->slug)
             ->update([
@@ -107,4 +98,6 @@ class PostController extends Controller
     {
         //
     }
+
+
 }
