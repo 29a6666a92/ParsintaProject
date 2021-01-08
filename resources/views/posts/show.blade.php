@@ -4,7 +4,13 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-5">
-      <h2 class="my-3">Detail</h2>
+      <h2>Detail</h2>
+      <h4 class="text-secondary">{{ $post->category->name }} &middot;
+        {{ $post->created_at->format('d F, Y') }}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-5">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{$post->title}}</h5>

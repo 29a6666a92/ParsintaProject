@@ -23,6 +23,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
+            'category_id' => rand(1,5),
             'title' => $this->faker->sentence(),
             'slug' => Str::slug($this->faker->sentence()),
             'content' => $this->faker->paragraph(10)
