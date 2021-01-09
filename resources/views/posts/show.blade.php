@@ -4,9 +4,9 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-5">
-      <h2>Detail</h2>
-      <h4 class="text-secondary">{{ $post->category->name }} &middot;
-        {{ $post->created_at->format('d F, Y') }}</h4>
+      <h4>Detail</h4>
+      <h5 class="text-secondary">Category : <a
+          href="{{ url('categories/' . $post->category->slug) }}">{{ $post->category->name }}</a> </h5>
     </div>
   </div>
   <div class="row">
