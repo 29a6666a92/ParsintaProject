@@ -5,8 +5,14 @@
   <div class="row">
     <div class="col-lg-5">
       <h4>Detail</h4>
-      <h5 class="text-secondary">Category : <a
-          href="{{ url('categories/' . $post->category->slug) }}">{{ $post->category->name }}</a> </h5>
+      <div>
+        <a href="{{ url('categories/' . $post->category->slug) }}">{{ $post->category->name }}</a>
+        &middot; {{ $post->created_at->format('d F, Y') }}
+        @foreach ($post->tags as $tag)
+        <a href="{{ url('tags/' . $tag->slug) }}">#{{ $tag->name }}</a>
+        @endforeach
+      </div>
+
     </div>
   </div>
   <div class="row">
