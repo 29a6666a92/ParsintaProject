@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create',['post' => new Post()]);
+        return view('posts.create',[
+            'post' => new Post(),
+            'categories' => Category::get(),
+            'tags' => Tag::get(),
+            ]);
     }
 
     /**
@@ -36,14 +42,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(PostRequest $request)
     {
 
 
-        $post = $request->all();
-        $post['slug'] = Str::slug($request->title);
+        $attr = $request->all();
+        $attr['slug'] = Str::slug($request->title);
+        $attr['category_id'] = request('category');
 
-        Post::create($post);
+        $post = Post::create($attr);
+        $post->tags()->attach(request('tags'));
+
         return redirect('posts')->with('status','Success !');
     }
 
@@ -55,7 +65,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-
         return view('posts.show',compact('post'));
     }
 
@@ -67,7 +76,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit',compact('post'));
+        return view('posts.edit',[
+            'post' => $post,
+            'categories' => Category::get(),
+            'tags' => Tag::get()
+            ]);
     }
 
     /**
@@ -80,13 +93,13 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
 
-        Post::where('slug' ,$post->slug)
-            ->update([
-                'title' => $request->title,
-                'content' => $request->content,
-            ]);
+        $attr = $request->all();
+        $attr['category_id'] = request('category');
 
-            return redirect('posts')->with('status','Edit Success !');
+        $post->update($attr);
+        $post->tags()->sync(request('tags'));
+
+        return redirect('posts')->with('status','Edit Success !');
     }
 
     /**
@@ -97,6 +110,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
         $post->delete();
         return redirect('posts')->with('status','Deleted Success !');
     }

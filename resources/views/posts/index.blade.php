@@ -6,15 +6,9 @@
     <div>
       @isset($category)
       <h4>Category : {{ $category->name }}</h4>
-      @endisset
-      @isset($tag)
-      <h4>Tags : {{ $tag->name }}</h4>
-      @endisset
-
-      @if (!isset($category) && !isset($tag) )
+      @else
       <h4>Post</h4>
-      @endif
-
+      @endisset
     </div>
     <div>
       <a href="{{url('posts/create')}}" class="btn btn-primary">New</a>
